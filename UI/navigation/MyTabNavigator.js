@@ -10,10 +10,12 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Image} from "react-native";
+import { StyleSheet, Image, View, Text} from "react-native";
 
-
+const count = 99;
 const MyTabNavigator = createBottomTabNavigator(
+  
+  
   {
     หน้าหลัก: { screen: HomeScreen ,
           navigationOptions: {
@@ -42,13 +44,30 @@ const MyTabNavigator = createBottomTabNavigator(
                     />;
 }, }, },
 
-    ข้อความ: { screen: ChatScreen,
+    ข้อความ: { screen: ChatScreen, 
             navigationOptions: {
             tabBarIcon: (tabInfo) => {
-            return <Image
+            if (count > 0 ){
+            return <View>  
+                    <View style={{ backgroundColor: "yellow", borderRadius:50,alignItems: 'center',justifyContent: 'center',textAlign: "center", right:0}}>
+                   <Text style={{ color: 'red', fontSize: 10, fontWeight: 'bold' }}>{count}</Text>
+                   </View>
+
+                   <Image
                       source={require('../assets/chat.png')}
                       style={{ height: 30, width: 30 }}
-                  />;
+                  />
+                   </View>
+            }
+            else {
+              return <Image
+                      source={require('../assets/chat.png')}
+                      style={{ height: 30, width: 30 }}
+                  />
+            }
+          
+                  
+                  ;
 }, }, },
 
 
@@ -63,7 +82,10 @@ const MyTabNavigator = createBottomTabNavigator(
         backgroundColor: "white",
       },
     },
+    
   }
+
+  
 );
 
 export default createAppContainer(MyTabNavigator);
