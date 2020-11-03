@@ -55,7 +55,6 @@ const HomeScreen = () => {
       </Picker>
       </View>
       <Text>{"\n"}</Text>
-      <Image style={styles.img} source={require("./assets/classroom.png")} />
       
       <View>
       <TouchableOpacity
@@ -64,6 +63,8 @@ const HomeScreen = () => {
             <Text>Search </Text>
          </TouchableOpacity>
       </View>
+      <Text>{"\n"}</Text>
+      <Image style={styles.img} source={require("../assets/classroom.png")} />
 
       
     </View>
@@ -127,6 +128,7 @@ const styles = StyleSheet.create({
   },
 
   img: {
+    
     position: "absolute",
     width: 100,
     height: 100,

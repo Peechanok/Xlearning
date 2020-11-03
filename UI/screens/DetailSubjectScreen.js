@@ -12,7 +12,7 @@ const DetailSubjectScreen = () => {
       <Text>{"\n"}รายละเอียดของวิชา... (แปะไว้ก่อน){"\n"}</Text>
 
       <View style={styles.information_teacher}> 
-      <Image style={styles.teacher} source={require("./assets/sehun.jpg")} />
+      <Image style={styles.teacher} source={require("../assets/sehun.jpg")} />
       <Text style={{color:"#FFFF00", fontSize:10, left:80, top:0}}> อาจารย์ : เซฮุนเซนเซย์  </Text>
       <Text style={{color:"#FFFF00", fontSize:10, left:80, top:0,}}>  วันที่เรียน : ศ. 11.00-23.00 </Text>
       <Text style={{color:"#FFFF00", fontSize:10, left:80, top:0,}}>  จำนวนนักเรียน : 99</Text>
@@ -20,7 +20,7 @@ const DetailSubjectScreen = () => {
      
       
       <View style={styles.box}>
-          <Image style={styles.img} source={require("./assets/wan.png")} />
+          <Image style={styles.img} source={require("../assets/wan.png")} />
          
           <Text style={styles.text}>{"\n"}{"\n"}{"\n"}{"\n"}ภาพรวมของเทคโนโลยีเครือข่ายไร้สายและการประยุกต์ใช้งาน พื้นฐานการส่งผ่านแบบไร้สาย
            การแพร่กระจายคลื่นวิทยุ เสาอากาศ การม๊อดดูเลท การมัลติเพล็กซ์ การควบคุมการเข้าถึงแบบหลายทางพร้อมกัน เครือข่ายท้องถิ่นแบบไร้สาย
