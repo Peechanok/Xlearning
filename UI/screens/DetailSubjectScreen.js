@@ -1,26 +1,17 @@
 import React, { useState }  from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity ,Alert , ScrollView} from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity ,Alert , ScrollView, ImageBackground} from 'react-native';
 
-// import MyNavigator  from './navigation/MyNavigator';
-
+import { FontAwesome5 } from '@expo/vector-icons'; 
 const DetailSubjectScreen = () => {
-
 
   return (
     <ScrollView style={styles.container}>
-   
-      <Text>{"\n"}รายละเอียดของวิชา... (แปะไว้ก่อน){"\n"}</Text>
+           
+          <Image style={styles.logo} source={require("../assets/wan.png")} />
+          <Image style={styles.teacher} source={require("../assets/sehun.jpg")} />         
 
-      <View style={styles.information_teacher}> 
-      <Image style={styles.teacher} source={require("../assets/sehun.jpg")} />
-      <Text style={{color:"#FFFF00", fontSize:10, left:80, top:0}}> อาจารย์ : เซฮุนเซนเซย์  </Text>
-      <Text style={{color:"#FFFF00", fontSize:10, left:80, top:0,}}>  วันที่เรียน : ศ. 11.00-23.00 </Text>
-      <Text style={{color:"#FFFF00", fontSize:10, left:80, top:0,}}>  จำนวนนักเรียน : 99</Text>
-     </View>
-     
-      
       <View style={styles.box}>
-          <Image style={styles.img} source={require("../assets/wan.png")} />
+          <Image style={styles.img} source={require("../assets/green-slate.jpg")} />
          
           <Text style={styles.text}>{"\n"}{"\n"}{"\n"}{"\n"}ภาพรวมของเทคโนโลยีเครือข่ายไร้สายและการประยุกต์ใช้งาน พื้นฐานการส่งผ่านแบบไร้สาย
            การแพร่กระจายคลื่นวิทยุ เสาอากาศ การม๊อดดูเลท การมัลติเพล็กซ์ การควบคุมการเข้าถึงแบบหลายทางพร้อมกัน เครือข่ายท้องถิ่นแบบไร้สาย
@@ -28,19 +19,26 @@ const DetailSubjectScreen = () => {
             ความปลอดภัยบนเครือข่ายท้องถิ่นแบบไร้สายและมาตรฐานที่เกี่ยวข้อง เครือข่ายส่วนบุคคลแบบไร้สาย เครือข่ายเมืองแบบไร้สาย 
             เครือข่ายระยะไกลแบบไร้สาย การจัดการและการแก้ปัญหาเครือข่ายไร้สายเบื้องต้น{"\n"}{"\n"}
           </Text>
-    <Text style={styles.title}>06016334 WIRELESS NETWORK TECHNOLOGY</Text>
-    </View>
-
-    <View >  
-      <TouchableOpacity
+         <Text style={styles.title}>06016334 WIRELESS NETWORK TECHNOLOGY{"\n"}{"\n"}Teacher : เซฮุนเซนเซย์</Text>
+      </View>
+ 
+      <View>  
+          
+       <TouchableOpacity
        style = {styles.btn}
        onPress={() => Alert.alert('ยืนยันการลงทะเบียน')}>
-            <Text>ลงทะเบียน</Text>
+            <Text style={{color:"#32CD32"}} >ลงทะเบียน</Text>
+         </TouchableOpacity>    
+                 
+       
+     {/* ถ้าลงทะเบียนแล้วจะขึ้นแต่ปุ่มเข้าห้องเรียน */}
+         <TouchableOpacity
+       style = {styles.btn2}
+       onPress={() => Alert.alert('ยืนยันการลงทะเบียน')}>
+            <Text style={{color:"#6A5ACD"}} >เข้าห้องเรียน</Text>
          </TouchableOpacity>
       </View>
-     
 
-    
     </ScrollView>
   );
  
@@ -50,9 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#6495ED",
-    padding:"3%",
-    
+    backgroundColor: "#F5F5F5",    
 
   },
   img: {
@@ -64,35 +60,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius:50,
-    backgroundColor:"black",
-    opacity: 0.5,
+    // backgroundColor:"black",
+    // opacity: 0.5,
     // padding: 10,
     borderWidth: 3,
 
   },
 
-  information_teacher: {
- 
-    height: 200,
-    width:  330,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius:50,
-    backgroundColor:"black",
-     
-  },
-
   teacher: {
-    flex: 1,
-    position: "absolute",
-    height: "100%",
-    width:  "50%",
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius:50,
-    borderWidth: 3,
-    marginTop: "10%",
-    left:0,
+    ...StyleSheet.absoluteFill,
+    left: "35%",
+    right:"35%",
+    top:"10%",
+    height: "10%",
+    width:  "30%",
+    borderRadius:100,
+
 
   },
 
@@ -107,6 +90,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
+   
     flex: 1,
     ...StyleSheet.absoluteFill,
     fontSize:10,
@@ -114,15 +98,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: "center",
     fontWeight: "bold",
-    backgroundColor:"white",
+    backgroundColor:"gold",
     color:"black",
     borderWidth: 2,
     padding:"2%",
-    width: "70%",
-    height:"10%",
-    top: "10%",
-    left: "15%",
-    right:"15%",
+    width: "85%",
+    height:80,
+    top: 70,
+    left: "10%",
+    right:"10%",
 
   },
   box: {
@@ -130,25 +114,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: "center",
+    padding:"3%",
+
    
       },
   btn: {
     
-    height: "30%",
-    width: "100%",
-    borderRadius:50,
-    backgroundColor: "#FFD700",
-    borderWidth: 2,
-    textAlign: "center",
-    color:"white", 
+    height: "15%",
+    width: "90%",
+    borderColor: "#32CD32",
+    borderWidth:2,
+    backgroundColor: "white",
     alignItems: 'center',
     justifyContent: 'center',
     bottom:"30%",
-    
+    margin:"5%",
+    borderRadius:10,
     
   },
-   
 
+  btn2: {
+    
+    height: "15%",
+    width: "90%",
+    borderColor: "#6A5ACD",
+    borderWidth:2,
+    backgroundColor: "white",
+    alignItems: 'center',
+    justifyContent: 'center',
+    bottom:"30%",
+    margin:"5%",
+    borderRadius:10,
+    
+  },
+  logo: {
+    position: "relative",
+    width: "100%",
+    height: 200,
+    bottom: 10,
+    
+  },
 
 });
 export default DetailSubjectScreen;

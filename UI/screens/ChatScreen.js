@@ -1,25 +1,35 @@
 import React  from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View , ScrollView, Image} from 'react-native';
 
 const ChatScreen = () => {
   
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
           
           <Text>Welcome to Chat!!!</Text>
-          
-           </View>); 
+
+       
+
+
+
+           </ScrollView>
+           
+           ); 
       
       }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
       textAlign: "center",
       flexDirection: "column",
       backgroundColor: "#6495ED",
-    },});
+      top:"5%",
+     
+    },
+
+
+
+});
 
 export default ChatScreen;
