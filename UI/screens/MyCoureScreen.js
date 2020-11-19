@@ -10,8 +10,6 @@ const MyCoureScreen = () => {
   return (
     <ScrollView style={styles.container}>
    
-      <Text>{"\n"}{"\n"}ห้องเรียนของฉัน (แปะไว้ก่อน)</Text>
-
       <View >
     <TouchableOpacity style={styles.btn}
       onPress={() => Alert.alert('Simple Button pressed')}> 
@@ -104,13 +102,14 @@ const styles = StyleSheet.create({
     color:"black",
     borderWidth: 2,
     padding:"2%",
-    width: "70%",
+    // width: "70%",
     height:"20%",
     top: "10%",
     left: "15%",
     right:"15%",
 
   },
+
   btn: {
     alignItems: 'center',
     justifyContent: 'center',

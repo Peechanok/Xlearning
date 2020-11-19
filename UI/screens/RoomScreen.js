@@ -92,6 +92,27 @@ const styles = StyleSheet.create({
     
 
   },
+  // title: {
+  //   flex: 1,
+  //   ...StyleSheet.absoluteFill,
+  //   fontSize:10,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   textAlign: "center",
+  //   fontWeight: "bold",
+  //   backgroundColor:"gold",
+  //   color:"black",
+  //   borderWidth: 2,
+  //   padding:"2%",
+  //   width: "85%",
+  //   height:80,
+  //   top: 120,
+  //   left: "8%",
+  //   right:"8%",
+   
+
+  // },
+
   title: {
     flex: 1,
     ...StyleSheet.absoluteFill,
@@ -104,11 +125,10 @@ const styles = StyleSheet.create({
     color:"black",
     borderWidth: 2,
     padding:"2%",
-    width: "85%",
-    height:80,
-    top: 120,
-    left: "8%",
-    right:"8%",
+    width: "100%",
+    height:"8%",
+    top: "10%",
+  
    
 
   },
