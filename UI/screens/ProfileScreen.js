@@ -1,11 +1,20 @@
-import React,{ useState } from 'react';
+import React,{ useState,  useEffect  } from 'react';
 import { View, Text,Platform, TextInput,Button, StyleSheet ,SafeAreaView,ScrollView,Image ,TouchableOpacity, Alert} from 'react-native';
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { AntDesign } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
+
+// import exampleImage from '../assets/sehun.jpg';
+
+// const exampleImageUri = Image.resolveAssetSource(exampleImage).uri
+
 const ProfileScreen = (navigation) => {
+    // const [image, setImage] = useState( <Image source={require("../assets/sehun.jpg")} style={styles.image} resizeMode="center"></Image>);
   const [selectedValue_role, setSelectedValue_role] = useState();
+  const [image, setImage] = useState(null);
+
     const [data, setData] = React.useState({
         username: '',
         password: '',
@@ -59,6 +68,33 @@ const ProfileScreen = (navigation) => {
         });
     }
 
+    // รูป
+    
+    useEffect(() => {
+        (async () => {
+          if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestCameraRollPermissionsAsync();
+            if (status !== 'granted') {
+              alert('Sorry, we need camera roll permissions to make this work!');
+            }
+          }
+        })();
+      }, []);
+    
+      const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          setImage(result.uri);
+        }
+      };
 
     return (
       <SafeAreaView style={styles.container}>
@@ -70,20 +106,20 @@ const ProfileScreen = (navigation) => {
 
                 <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("../assets/sehun.jpg")} style={styles.image} resizeMode="center"></Image>
+                    {image && <Image source={{ uri: image }} style={styles.image} resizeMode="center" />} 
+                        {/* <Image source={require("../assets/sehun.jpg")} style={styles.image} resizeMode="center"></Image> */}
                     </View>
                     
                     <View style={styles.active}></View>
                     {/* มีสถานะไหม */}
-                    <TouchableOpacity style={styles.add}
-      onPress={() => Alert.alert('เอาไว้เพิ่มรูป')}> 
+                    <TouchableOpacity style={styles.add} onPress={pickImage}> 
         <Ionicons name="ios-add" size={48} color="#DFD8C8" style={{ marginTop: 6, marginLeft: 2 }}></Ionicons>
     </TouchableOpacity> 
                         
                     
                 </View>
                 <SafeAreaView style={styles.container}>
-                <ScrollView>
+                <ScrollView style={{ padding: 10 }}>
               <Text style={styles.text_footer}>ID</Text>
               <View style={styles.action}>
                   <FontAwesome 
@@ -379,4 +415,5 @@ textSign: {
     fontSize: 18,
     fontWeight: 'bold'
 }
+
 });
