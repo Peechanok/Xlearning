@@ -10,6 +10,9 @@ import ChatScreen from '../screens/ChatScreen';
 import MyCoureScreen from '../screens/MyCoureScreen';
 import RoomScreen from '../screens/RoomScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import DetailSubjectScreen from '../screens/DetailSubjectScreen';
+import AddCouseScreen from '../screens/AddCouseScreen';
+import CreateQRScreen from '../screens/CreateQRScreen';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
@@ -146,7 +149,7 @@ const RoomScreenStackScreen = ({navigation}) => (
           fontWeight: 'bold'
           }
       }}>
-          <DetailsStack.Screen name="เช็กรายชื่อ" component={RoomScreen} options={{
+          <DetailsStack.Screen name="เช็กรายชื่อ" component={CreateQRScreen} options={{
           headerLeft: () => (
               <Icon.Button name="ios-menu" size={25} backgroundColor="#1f65ff" onPress={() => navigation.openDrawer()}></Icon.Button>
           )
