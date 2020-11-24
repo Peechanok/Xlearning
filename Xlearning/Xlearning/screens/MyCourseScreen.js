@@ -1,21 +1,28 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
 // import MyNavigator  from './navigation/MyNavigator';
 
 const MyCourseScreen = () => {
+  const auth = useSelector((state) => state.auth);
+
   const shouldRenderCreateCourseButton = () => {
-    return (
-      <View>
-        <TouchableOpacity style={styles.btn2} onPress={() => Alert.alert("เพิ่มห้องเรียนสำหรับครู")}>
-          <Text style={{ color: "red" }}>
-            <AntDesign name='pluscircle' size={20} color='red' />
-            เพิ่มห้องเรียน
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if (auth.user.role == "teacher") {
+      return (
+        <View>
+          <TouchableOpacity style={styles.btn2} onPress={() => Alert.alert("เพิ่มห้องเรียนสำหรับครู")}>
+            <Text style={{ color: "red" }}>
+              <AntDesign name='pluscircle' size={20} color='red' />
+              เพิ่มห้องเรียน
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return <></>;
+    }
   };
 
   return (
