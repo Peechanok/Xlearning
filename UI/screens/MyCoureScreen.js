@@ -1,6 +1,6 @@
 import React, { useState }  from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity ,Alert , ScrollView} from 'react-native';
-
+import { AntDesign } from '@expo/vector-icons'; 
 
 // import MyNavigator  from './navigation/MyNavigator';
 
@@ -9,9 +9,10 @@ const MyCoureScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-   
-      <Text>{"\n"}{"\n"}ห้องเรียนของฉัน (แปะไว้ก่อน)</Text>
 
+
+    
+   
       <View >
     <TouchableOpacity style={styles.btn}
       onPress={() => Alert.alert('Simple Button pressed')}> 
@@ -50,7 +51,16 @@ const MyCoureScreen = () => {
     <Text style={styles.title}>06016310 HUMAN INTERFACE DESIGN</Text>
     </View>
 
+    
 
+    <View>
+      <TouchableOpacity
+       style = {styles.btn2}
+       onPress={() => Alert.alert('เพิ่มห้องเรียนสำหรับครู')}>
+            <Text style={{color:"red"}}><AntDesign name="pluscircle" size={20} color="red" />
+            เพิ่มห้องเรียน</Text>
+         </TouchableOpacity>    
+         </View>
     
     </ScrollView>
   );
@@ -104,20 +114,35 @@ const styles = StyleSheet.create({
     color:"black",
     borderWidth: 2,
     padding:"2%",
-    width: "70%",
+    // width: "70%",
     height:"20%",
     top: "10%",
     left: "15%",
     right:"15%",
 
   },
+
   btn: {
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: "center",
 
       },
-   
+
+  btn2: {
+    
+        height: "20%",
+        width: "80%",
+        borderColor: "red",
+        borderWidth:2,
+        backgroundColor: "white",
+        alignItems: 'center',
+        justifyContent: 'center',
+        bottom:"20%",
+        margin:"10%",
+        borderRadius:10,
+        
+      },
 
 
 });
