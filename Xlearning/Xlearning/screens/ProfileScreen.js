@@ -12,11 +12,14 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import * as Animatable from "react-native-animatable";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { AntDesign } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserProfile } from "../store/actions/UserAction";
 
 // import exampleImage from '../assets/sehun.jpg';
 
@@ -24,29 +27,30 @@ import * as ImagePicker from "expo-image-picker";
 
 const ProfileScreen = (navigation) => {
   // const [image, setImage] = useState( <Image source={require("../assets/sehun.jpg")} style={styles.image} resizeMode="center"></Image>);
-  const [selectedValue_role, setSelectedValue_role] = useState();
   const [image, setImage] = useState(null);
 
+  const auth = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
   const [data, setData] = React.useState({
-    username: "",
-    password: "",
-    confirm_password: "",
+    fullname: auth.user.fullname,
     check_textInputChange: false,
     secureTextEntry: true,
     confirm_secureTextEntry: true,
   });
 
-  const textInputChange = (val) => {
-    if (val.length !== 0) {
+  const handleFullnameChange = (val) => {
+    if (val) {
       setData({
         ...data,
-        username: val,
+        fullname: val,
         check_textInputChange: true,
       });
     } else {
       setData({
         ...data,
-        username: val,
+        fullname: "",
         check_textInputChange: false,
       });
     }
@@ -95,17 +99,21 @@ const ProfileScreen = (navigation) => {
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [1, 1],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
     }
+  };
+
+  const saveProfileData = () => {
+    const profile = { ...auth.user, fullname: data.fullname, imageUri: image ?? "" };
+    dispatch(updateUserProfile(profile));
+    Alert.alert("อัพเดตข้อมูลสำเร็จ");
   };
 
   return (
@@ -118,7 +126,7 @@ const ProfileScreen = (navigation) => {
 
         <View style={{ alignSelf: "center" }}>
           <View style={styles.profileImage}>
-            {image && <Image source={{ uri: image }} style={styles.image} resizeMode='center' />}
+            {image && <Image source={{ uri: image ?? auth.user.imageUri }} style={styles.image} resizeMode='center' />}
             {/* <Image source={require("../assets/sehun.jpg")} style={styles.image} resizeMode="center"></Image> */}
           </View>
 
@@ -137,28 +145,31 @@ const ProfileScreen = (navigation) => {
                 placeholder='กรอกรหัสประจำตัว..'
                 style={styles.textInput}
                 autoCapitalize='none'
-                onChangeText={(val) => textInputChange(val)}
+                value={auth.user.id.toString()}
+                editable={false}
               />
-              {data.check_textInputChange ? (
+              {/* {data.check_textInputChange ? (
                 <Animatable.View animation='bounceIn'>
                   <Feather name='check-circle' color='green' size={20} />
                 </Animatable.View>
-              ) : null}
+              ) : null} */}
             </View>
-            <Text style={styles.text_footer}>ชื่อ-นามสกุล</Text>
+
+            <Text style={styles.text_footer}>Username</Text>
             <View style={styles.action}>
-              <AntDesign name='adduser' size={20} color='#05375a' />
+              <FontAwesome name='user-o' color='#05375a' size={20} />
               <TextInput
-                placeholder='กรอกชื่อของคุณ..'
+                placeholder='กรอก Username..'
                 style={styles.textInput}
                 autoCapitalize='none'
-                onChangeText={(val) => textInputChange(val)}
+                value={auth.user.username}
+                editable={false}
               />
-              {data.check_textInputChange ? (
+              {/* {data.check_textInputChange ? (
                 <Animatable.View animation='bounceIn'>
                   <Feather name='check-circle' color='green' size={20} />
                 </Animatable.View>
-              ) : null}
+              ) : null} */}
             </View>
 
             <Text
@@ -169,16 +180,16 @@ const ProfileScreen = (navigation) => {
                 },
               ]}
             >
-              Username
+              ชื่อ-นามสกุล
             </Text>
-
             <View style={styles.action}>
-              <FontAwesome name='user-o' color='#05375a' size={20} />
+              <AntDesign name='adduser' size={20} color='#05375a' />
               <TextInput
-                placeholder='กรอก Username..'
+                placeholder='กรอกชื่อของคุณ..'
                 style={styles.textInput}
                 autoCapitalize='none'
-                onChangeText={(val) => textInputChange(val)}
+                defaultValue={auth.user.fullname}
+                onChangeText={(val) => handleFullnameChange(val)}
               />
               {data.check_textInputChange ? (
                 <Animatable.View animation='bounceIn'>
@@ -188,7 +199,7 @@ const ProfileScreen = (navigation) => {
             </View>
 
             <View style={styles.button}>
-              <TouchableOpacity style={[styles.signIn, { backgroundColor: "#6495ED" }]} onPress={() => {}}>
+              <TouchableOpacity style={[styles.signIn, { backgroundColor: "#6495ED" }]} onPress={saveProfileData}>
                 <Text
                   style={[
                     styles.textSign,

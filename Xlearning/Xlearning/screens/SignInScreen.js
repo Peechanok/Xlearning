@@ -1,15 +1,13 @@
 import React from "react";
-import { View, Text, TouchableOpacity, TextInput, Platform, StyleSheet, StatusBar, Alert } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Platform, StyleSheet, StatusBar } from "react-native";
 import * as Animatable from "react-native-animatable";
 // import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 
 import { useTheme } from "react-native-paper";
-
-import { AuthContext } from "../components/context";
-
-import Users from "../model/users";
+import { login } from "../store/actions/LoginAction";
+import { useDispatch } from "react-redux";
 
 const SignInScreen = ({ navigation }) => {
   const [data, setData] = React.useState({
@@ -23,7 +21,7 @@ const SignInScreen = ({ navigation }) => {
 
   const { colors } = useTheme();
 
-  const { signIn } = React.useContext(AuthContext);
+  const dispatch = useDispatch();
 
   const textInputChange = (val) => {
     if (val.trim().length >= 4) {
@@ -80,21 +78,13 @@ const SignInScreen = ({ navigation }) => {
     }
   };
 
-  const loginHandle = (userName, password) => {
-    const foundUser = Users.filter((item) => {
-      return userName == item.username && password == item.password;
-    });
-
+  const signIn = () => {
     if (data.username.length == 0 || data.password.length == 0) {
       Alert.alert("ไม่มีข้อมูล!", "กรุณาใส่ Username และ Password ให้ครบ", [{ text: "Okay" }]);
       return;
+    } else {
+      dispatch(login(data.username, data.password));
     }
-
-    if (foundUser.length == 0) {
-      Alert.alert("ข้อมูลไม่ถูกต้อง!", "Username หรือ Password อาจไม่ถูกต้อง", [{ text: "Okay" }]);
-      return;
-    }
-    signIn(foundUser);
   };
 
   return (
@@ -196,7 +186,7 @@ const SignInScreen = ({ navigation }) => {
           <TouchableOpacity
             style={[styles.signIn, { backgroundColor: "#6495ED" }]}
             onPress={() => {
-              loginHandle(data.username, data.password);
+              signIn(data.username, data.password);
             }}
           >
             {/* <LinearGradient
