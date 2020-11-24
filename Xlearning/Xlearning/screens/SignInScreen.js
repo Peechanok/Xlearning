@@ -86,12 +86,12 @@ const SignInScreen = ({ navigation }) => {
     });
 
     if (data.username.length == 0 || data.password.length == 0) {
-      Alert.alert("ไม่มีข้อมู,!", "กรุณาใส่ Username และ password ให้ครบ", [{ text: "Okay" }]);
+      Alert.alert("ไม่มีข้อมูล!", "กรุณาใส่ Username และ Password ให้ครบ", [{ text: "Okay" }]);
       return;
     }
 
     if (foundUser.length == 0) {
-      Alert.alert("ข้อมูลไม่ถูกต้อง!", "Username หรือ password อาจไม่ถูกต้อง", [{ text: "Okay" }]);
+      Alert.alert("ข้อมูลไม่ถูกต้อง!", "Username หรือ Password อาจไม่ถูกต้อง", [{ text: "Okay" }]);
       return;
     }
     signIn(foundUser);
