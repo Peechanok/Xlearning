@@ -4,7 +4,20 @@ import { AntDesign } from "@expo/vector-icons";
 
 // import MyNavigator  from './navigation/MyNavigator';
 
-const MyCoureScreen = () => {
+const MyCourseScreen = () => {
+  const shouldRenderCreateCourseButton = () => {
+    return (
+      <View>
+        <TouchableOpacity style={styles.btn2} onPress={() => Alert.alert("เพิ่มห้องเรียนสำหรับครู")}>
+          <Text style={{ color: "red" }}>
+            <AntDesign name='pluscircle' size={20} color='red' />
+            เพิ่มห้องเรียน
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -41,14 +54,7 @@ const MyCoureScreen = () => {
         <Text style={styles.title}>06016310 HUMAN INTERFACE DESIGN</Text>
       </View>
 
-      <View>
-        <TouchableOpacity style={styles.btn2} onPress={() => Alert.alert("เพิ่มห้องเรียนสำหรับครู")}>
-          <Text style={{ color: "red" }}>
-            <AntDesign name='pluscircle' size={20} color='red' />
-            เพิ่มห้องเรียน
-          </Text>
-        </TouchableOpacity>
-      </View>
+      {shouldRenderCreateCourseButton()}
     </ScrollView>
   );
 };
@@ -121,4 +127,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-export default MyCoureScreen;
+export default MyCourseScreen;

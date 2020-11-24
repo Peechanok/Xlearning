@@ -6,7 +6,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import ChatScreen from "../screens/ChatScreen";
-import MyCoureScreen from "../screens/MyCoureScreen";
+import MyCourseScreen from "../screens/MyCourseScreen";
 import RoomScreen from "../screens/RoomScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import DetailSubjectScreen from "../screens/DetailSubjectScreen";
@@ -31,7 +31,7 @@ const MainTabScreen = () => (
     />
     <Tab.Screen
       name='mycourse'
-      component={MyCoureScreenStackScreen}
+      component={MyCourseScreenStackScreen}
       options={{
         tabBarLabel: "ห้องเรียนของฉัน",
         tabBarColor: "#1f65ff",
@@ -129,7 +129,7 @@ const ProfileScreenStackScreen = ({ navigation }) => (
     />
   </DetailsStack.Navigator>
 );
-const MyCoureScreenStackScreen = ({ navigation }) => (
+const MyCourseScreenStackScreen = ({ navigation }) => (
   <DetailsStack.Navigator
     screenOptions={{
       headerStyle: {
@@ -143,7 +143,7 @@ const MyCoureScreenStackScreen = ({ navigation }) => (
   >
     <DetailsStack.Screen
       name='ห้องเรียนของฉัน'
-      component={MyCoureScreen}
+      component={MyCourseScreen}
       options={{
         headerLeft: () => (
           <Icon.Button
