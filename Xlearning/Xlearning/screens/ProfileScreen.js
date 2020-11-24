@@ -126,7 +126,20 @@ const ProfileScreen = (navigation) => {
 
         <View style={{ alignSelf: "center" }}>
           <View style={styles.profileImage}>
-            {image && <Image source={{ uri: image ?? auth.user.imageUri }} style={styles.image} resizeMode='center' />}
+            {image && (
+              <Image
+                source={{
+                  uri:
+                    image != null
+                      ? image
+                      : auth.user.imageUri != null && auth.user.imageUri != ""
+                      ? auth.user.imageUri
+                      : "https://api.adorable.io/avatars/50/abott@adorable.png",
+                }}
+                style={styles.image}
+                resizeMode='center'
+              />
+            )}
             {/* <Image source={require("../assets/sehun.jpg")} style={styles.image} resizeMode="center"></Image> */}
           </View>
 

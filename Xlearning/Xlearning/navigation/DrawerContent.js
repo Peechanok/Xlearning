@@ -4,7 +4,7 @@ import { useTheme, Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRip
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import AsyncStorage from "@react-native-community/async-storage";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { toggleDarkMode } from "../store/actions/ThemeAction";
 import { logout } from "../store/actions/LoginAction";
 
@@ -14,6 +14,8 @@ export function DrawerContent(props) {
   // });
 
   const paperTheme = useTheme();
+
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleToggleTheme = () => {
@@ -34,13 +36,13 @@ export function DrawerContent(props) {
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Avatar.Image
                 source={{
-                  uri: "https://api.adorable.io/avatars/50/abott@adorable.png",
+                  uri: auth.user?.imageUri ?? "https://api.adorable.io/avatars/50/abott@adorable.png",
                 }}
                 size={50}
               />
               <View style={{ marginLeft: 15, flexDirection: "column" }}>
-                <Title style={styles.title}>มานี มีนา</Title>
-                <Caption style={styles.caption}>61070146</Caption>
+                <Title style={styles.title}>{auth.user.fullname}</Title>
+                <Caption style={styles.caption}>{auth.user.id}</Caption>
               </View>
             </View>
           </View>
