@@ -4,9 +4,9 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import * as PropTypes from 'prop-types';
-import React from 'react';
+} from "react-native";
+import * as PropTypes from "prop-types";
+import React from "react";
 
 const ToolbarButton = ({ title, onPress }) => (
   <TouchableOpacity onPress={onPress}>
@@ -36,7 +36,7 @@ export default class Toolbar extends React.Component {
   };
 
   state = {
-    text: '',
+    text: "",
   };
 
   componentDidUpdate(prevProps) {
@@ -49,7 +49,7 @@ export default class Toolbar extends React.Component {
     }
   }
 
-  setInputRef = ref => {
+  setInputRef = (ref) => {
     this.input = ref;
   };
 
@@ -65,7 +65,7 @@ export default class Toolbar extends React.Component {
     onChangeFocus(false);
   };
 
-  handleChangeText = text => {
+  handleChangeText = (text) => {
     this.setState({ text });
   };
 
@@ -76,7 +76,7 @@ export default class Toolbar extends React.Component {
     if (!text) return; // Don't submit if empty
 
     onSubmit(text);
-    this.setState({ text: '' });
+    this.setState({ text: "" });
   };
 
   render() {
@@ -86,13 +86,13 @@ export default class Toolbar extends React.Component {
 
     return (
       <View style={styles.toolbar}>
-        <ToolbarButton title={'📷'} onPress={onPressCamera} />
+        <ToolbarButton title={"📷"} onPress={onPressCamera} />
         {/* <ToolbarButton title={'📍'} onPress={onPressLocation} /> */}
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            underlineColorAndroid={'transparent'}
-            placeholder={'Type something!'}
+            underlineColorAndroid={"transparent"}
+            placeholder={"Type something!"}
             blurOnSubmit={false}
             value={text}
             onChangeText={this.handleChangeText}
@@ -109,22 +109,22 @@ export default class Toolbar extends React.Component {
 
 const styles = StyleSheet.create({
   toolbar: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 10,
     paddingLeft: 16,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   inputContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderWidth: 1,
-    borderColor: 'rgba(0,0,0,0.04)',
+    borderColor: "rgba(0,0,0,0.04)",
     borderRadius: 16,
     paddingVertical: 4,
     paddingHorizontal: 12,
-    backgroundColor: 'rgba(0,0,0,0.02)',
+    backgroundColor: "rgba(0,0,0,0.02)",
   },
   input: {
     flex: 1,
@@ -134,6 +134,6 @@ const styles = StyleSheet.create({
     top: -2,
     marginRight: 12,
     fontSize: 20,
-    color: 'grey',
+    color: "grey",
   },
 });

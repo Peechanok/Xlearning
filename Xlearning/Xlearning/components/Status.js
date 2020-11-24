@@ -1,13 +1,7 @@
-import Constants from 'expo-constants';
-import NetInfo from '@react-native-community/netinfo';
-import {
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import React from 'react';
+import Constants from "expo-constants";
+import NetInfo from "@react-native-community/netinfo";
+import { Platform, StatusBar, StyleSheet, Text, View } from "react-native";
+import React from "react";
 
 export default class Status extends React.Component {
   state = {
@@ -36,18 +30,18 @@ export default class Status extends React.Component {
   render() {
     const { isConnected } = this.state;
 
-    const backgroundColor = isConnected ? 'white' : 'red';
+    const backgroundColor = isConnected ? "white" : "red";
 
     const statusBar = (
       <StatusBar
         backgroundColor={backgroundColor}
-        barStyle={isConnected ? 'dark-content' : 'light-content'}
+        barStyle={isConnected ? "dark-content" : "light-content"}
         animated={false}
       />
     );
 
     const messageContainer = (
-      <View style={styles.messageContainer} pointerEvents={'none'}>
+      <View style={styles.messageContainer} pointerEvents={"none"}>
         {statusBar}
         {!isConnected && (
           <View style={styles.bubble}>
@@ -57,20 +51,15 @@ export default class Status extends React.Component {
       </View>
     );
 
-    if (Platform.OS === 'ios') {
-      return (
-        <View style={[styles.status, { backgroundColor }]}>
-          {messageContainer}
-        </View>
-      );
+    if (Platform.OS === "ios") {
+      return <View style={[styles.status, { backgroundColor }]}>{messageContainer}</View>;
     }
 
     return messageContainer;
   }
 }
 
-const statusHeight =
-  Platform.OS === 'ios' ? Constants.statusBarHeight : 0;
+const statusHeight = Platform.OS === "ios" ? Constants.statusBarHeight : 0;
 
 const styles = StyleSheet.create({
   status: {
@@ -79,20 +68,20 @@ const styles = StyleSheet.create({
   },
   messageContainer: {
     zIndex: 1,
-    position: 'absolute',
+    position: "absolute",
     top: statusHeight + 20,
     right: 0,
     left: 0,
     height: 80,
-    alignItems: 'center',
+    alignItems: "center",
   },
   bubble: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
-    backgroundColor: 'red',
+    backgroundColor: "red",
   },
   text: {
-    color: 'white',
+    color: "white",
   },
 });

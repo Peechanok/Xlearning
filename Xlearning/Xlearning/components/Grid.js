@@ -1,11 +1,6 @@
-import {
-  Dimensions,
-  FlatList,
-  PixelRatio,
-  StyleSheet,
-} from 'react-native';
-import * as PropTypes from 'prop-types';
-import React from 'react';
+import { Dimensions, FlatList, PixelRatio, StyleSheet } from "react-native";
+import * as PropTypes from "prop-types";
+import React from "react";
 
 export default class Grid extends React.Component {
   static propTypes = {
@@ -19,18 +14,16 @@ export default class Grid extends React.Component {
     itemMargin: StyleSheet.hairlineWidth,
   };
 
-  renderGridItem = info => {
+  renderGridItem = (info) => {
     const { index } = info;
     const { renderItem, numColumns, itemMargin } = this.props;
 
     // We want to get the device width on render, in case the device
     // is rotated
-    const { width } = Dimensions.get('window');
+    const { width } = Dimensions.get("window");
 
     // Fix visual inconsistencies by aligning to the nearest pixel
-    const size = PixelRatio.roundToNearestPixel(
-      (width - itemMargin * (numColumns - 1)) / numColumns,
-    );
+    const size = PixelRatio.roundToNearestPixel((width - itemMargin * (numColumns - 1)) / numColumns);
 
     const marginTop = index < numColumns ? 0 : itemMargin;
     const marginLeft = index % numColumns === 0 ? 0 : itemMargin;
@@ -39,8 +32,6 @@ export default class Grid extends React.Component {
   };
 
   render() {
-    return (
-      <FlatList {...this.props} renderItem={this.renderGridItem} />
-    );
+    return <FlatList {...this.props} renderItem={this.renderGridItem} />;
   }
 }

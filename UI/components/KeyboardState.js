@@ -1,6 +1,6 @@
-import { Keyboard, Platform } from 'react-native';
-import * as PropTypes from 'prop-types';
-import React from 'react';
+import { Keyboard, Platform } from "react-native";
+import * as PropTypes from "prop-types";
+import React from "react";
 
 const INITIAL_ANIMATION_DURATION = 250;
 
@@ -18,7 +18,9 @@ export default class KeyboardState extends React.Component {
   constructor(props) {
     super(props);
 
-    const { layout: { height } } = props;
+    const {
+      layout: { height },
+    } = props;
 
     this.state = {
       contentHeight: height,
@@ -31,37 +33,31 @@ export default class KeyboardState extends React.Component {
   }
 
   componentDidMount() {
-    if (Platform.OS === 'ios') {
+    if (Platform.OS === "ios") {
       this.subscriptions = [
-        Keyboard.addListener(
-          'keyboardWillShow',
-          this.keyboardWillShow,
-        ),
-        Keyboard.addListener(
-          'keyboardWillHide',
-          this.keyboardWillHide,
-        ),
-        Keyboard.addListener('keyboardDidShow', this.keyboardDidShow),
-        Keyboard.addListener('keyboardDidHide', this.keyboardDidHide),
+        Keyboard.addListener("keyboardWillShow", this.keyboardWillShow),
+        Keyboard.addListener("keyboardWillHide", this.keyboardWillHide),
+        Keyboard.addListener("keyboardDidShow", this.keyboardDidShow),
+        Keyboard.addListener("keyboardDidHide", this.keyboardDidHide),
       ];
     } else {
       this.subscriptions = [
-        Keyboard.addListener('keyboardDidHide', this.keyboardDidHide),
-        Keyboard.addListener('keyboardDidShow', this.keyboardDidShow),
+        Keyboard.addListener("keyboardDidHide", this.keyboardDidHide),
+        Keyboard.addListener("keyboardDidShow", this.keyboardDidShow),
       ];
     }
   }
 
   componentWillUnmount() {
-    this.subscriptions.forEach(subscription => subscription.remove());
+    this.subscriptions.forEach((subscription) => subscription.remove());
   }
 
-  keyboardWillShow = event => {
+  keyboardWillShow = (event) => {
     this.setState({ keyboardWillShow: true });
     this.measure(event);
   };
 
-  keyboardDidShow = event => {
+  keyboardDidShow = (event) => {
     this.setState({
       keyboardWillShow: false,
       keyboardVisible: true,
@@ -69,7 +65,7 @@ export default class KeyboardState extends React.Component {
     this.measure(event);
   };
 
-  keyboardWillHide = event => {
+  keyboardWillHide = (event) => {
     this.setState({ keyboardWillHide: true });
     this.measure(event);
   };
@@ -81,7 +77,7 @@ export default class KeyboardState extends React.Component {
     });
   };
 
-  measure = event => {
+  measure = (event) => {
     const { layout } = this.props;
 
     const {

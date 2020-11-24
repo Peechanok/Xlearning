@@ -1,32 +1,32 @@
-import React  from 'react';
-import { StyleSheet, Text, View , ScrollView, Image,  Alert,
-  BackHandler, TouchableHighlight,} from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Alert,
+  BackHandler,
+  TouchableHighlight,
+} from "react-native";
 
+import { createImageMessage, createTextMessage } from "../utils/MessageUtils";
+import ImageGrid from "../components/ImageGrid";
+import KeyboardState from "../components/KeyboardState";
+import MeasureLayout from "../components/MeasureLayout";
+import MessageList from "../components/MessageList";
+import MessagingContainer, {
+  INPUT_METHOD,
+} from "../components/MessagingContainer";
+import Status from "../components/Status";
+import Toolbar from "../components/Toolbar";
 
-  import {
-    createImageMessage,
-    createTextMessage,
-  } from '../utils/MessageUtils';
-  import ImageGrid from '../components/ImageGrid';
-  import KeyboardState from '../components/KeyboardState';
-  import MeasureLayout from '../components/MeasureLayout';
-  import MessageList from '../components/MessageList';
-  import MessagingContainer, {
-    INPUT_METHOD,
-  } from '../components/MessagingContainer';
-  import Status from '../components/Status';
-  import Toolbar from '../components/Toolbar';
-  
-
-
-  class ChatScreen extends React.Component{
-
+class ChatScreen extends React.Component {
   state = {
     messages: [
-      createImageMessage('https://unsplash.it/300/300'),
-      createTextMessage('World'),
-      createTextMessage('Hello'),
-      
+      createImageMessage("https://unsplash.it/300/300"),
+      createTextMessage("World"),
+      createTextMessage("Hello"),
     ],
     fullscreenImageId: null,
     isInputFocused: false,
@@ -35,7 +35,7 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
 
   componentDidMount() {
     this.subscription = BackHandler.addEventListener(
-      'hardwareBackPress',
+      "hardwareBackPress",
       () => {
         const { fullscreenImageId } = this.state;
 
@@ -45,7 +45,7 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
         }
 
         return false;
-      },
+      }
     );
   }
 
@@ -64,9 +64,7 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
     });
   };
 
-  
-
-  handlePressImage = uri => {
+  handlePressImage = (uri) => {
     const { messages } = this.state;
 
     this.setState({
@@ -74,7 +72,7 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
     });
   };
 
-  handleSubmit = text => {
+  handleSubmit = (text) => {
     const { messages } = this.state;
 
     this.setState({
@@ -82,41 +80,39 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
     });
   };
 
-  handleChangeFocus = isFocused => {
+  handleChangeFocus = (isFocused) => {
     this.setState({ isInputFocused: isFocused });
   };
 
-  handleChangeInputMethod = inputMethod => {
+  handleChangeInputMethod = (inputMethod) => {
     this.setState({ inputMethod });
   };
 
   handlePressMessage = ({ id, type }) => {
     switch (type) {
-      case 'text':
+      case "text":
         Alert.alert(
-          'Delete message?',
-          'Are you sure you want to permanently delete this message?',
+          "Delete message?",
+          "Are you sure you want to permanently delete this message?",
           [
             {
-              text: 'Cancel',
-              style: 'cancel',
+              text: "Cancel",
+              style: "cancel",
             },
             {
-              text: 'Delete',
-              style: 'destructive',
+              text: "Delete",
+              style: "destructive",
               onPress: () => {
                 const { messages } = this.state;
                 this.setState({
-                  messages: messages.filter(
-                    message => message.id !== id,
-                  ),
+                  messages: messages.filter((message) => message.id !== id),
                 });
               },
             },
-          ],
+          ]
         );
         break;
-      case 'image':
+      case "image":
         this.setState({
           fullscreenImageId: id,
           isInputFocused: false,
@@ -126,7 +122,7 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
         break;
     }
   };
-  
+
   renderMessageList() {
     const { messages } = this.state;
 
@@ -154,7 +150,6 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
       </View>
     );
   }
-      
 
   renderInputMethodEditor = () => (
     <View style={styles.inputMethodEditor}>
@@ -167,9 +162,7 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
 
     if (!fullscreenImageId) return null;
 
-    const image = messages.find(
-      message => message.id === fullscreenImageId,
-    );
+    const image = messages.find((message) => message.id === fullscreenImageId);
 
     if (!image) return null;
 
@@ -192,16 +185,14 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
       <View style={styles.container}>
         <Status />
         <MeasureLayout>
-          {layout => (
+          {(layout) => (
             <KeyboardState layout={layout}>
-              {keyboardInfo => (
+              {(keyboardInfo) => (
                 <MessagingContainer
                   {...keyboardInfo}
                   inputMethod={inputMethod}
                   onChangeInputMethod={this.handleChangeInputMethod}
-                  renderInputMethodEditor={
-                    this.renderInputMethodEditor
-                  }
+                  renderInputMethodEditor={this.renderInputMethodEditor}
                 >
                   {this.renderMessageList()}
                   {this.renderToolbar()}
@@ -214,38 +205,35 @@ import { StyleSheet, Text, View , ScrollView, Image,  Alert,
       </View>
     );
   }
+}
 
-
-      }
-
-      const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: 'white',
-        },
-        content: {
-          flex: 1,
-          backgroundColor: 'white',
-        },
-        inputMethodEditor: {
-          flex: 1,
-          backgroundColor: 'white',
-        },
-        toolbar: {
-          borderTopWidth: 1,
-          borderTopColor: 'rgba(0,0,0,0.04)',
-          backgroundColor: 'white',
-        },
-        fullscreenOverlay: {
-          ...StyleSheet.absoluteFillObject,
-          backgroundColor: 'black',
-          zIndex: 2,
-        },
-        fullscreenImage: {
-          flex: 1,
-          resizeMode: 'contain',
-        },
-      });
-      
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  content: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  inputMethodEditor: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  toolbar: {
+    borderTopWidth: 1,
+    borderTopColor: "rgba(0,0,0,0.04)",
+    backgroundColor: "white",
+  },
+  fullscreenOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "black",
+    zIndex: 2,
+  },
+  fullscreenImage: {
+    flex: 1,
+    resizeMode: "contain",
+  },
+});
 
 export default ChatScreen;

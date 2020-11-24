@@ -1,25 +1,16 @@
-import {
-  BackHandler,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-  View,
-} from 'react-native';
-import * as PropTypes from 'prop-types';
-import React from 'react';
-import { isIphoneX } from 'react-native-iphone-x-helper';
+import { BackHandler, LayoutAnimation, Platform, UIManager, View } from "react-native";
+import * as PropTypes from "prop-types";
+import React from "react";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
-if (
-  Platform.OS === 'android' &&
-  UIManager.setLayoutAnimationEnabledExperimental
-) {
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
 export const INPUT_METHOD = {
-  NONE: 'NONE',
-  KEYBOARD: 'KEYBOARD',
-  CUSTOM: 'CUSTOM',
+  NONE: "NONE",
+  KEYBOARD: "KEYBOARD",
+  CUSTOM: "CUSTOM",
 };
 
 export default class MessagingContainer extends React.Component {
@@ -32,8 +23,7 @@ export default class MessagingContainer extends React.Component {
     keyboardWillShow: PropTypes.bool.isRequired,
     keyboardWillHide: PropTypes.bool.isRequired,
     keyboardAnimationDuration: PropTypes.number.isRequired,
-    inputMethod: PropTypes.oneOf(Object.values(INPUT_METHOD))
-      .isRequired,
+    inputMethod: PropTypes.oneOf(Object.values(INPUT_METHOD)).isRequired,
     onChangeInputMethod: PropTypes.func,
     renderInputMethodEditor: PropTypes.func.isRequired,
   };
@@ -44,19 +34,16 @@ export default class MessagingContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.subscription = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => {
-        const { onChangeInputMethod, inputMethod } = this.props;
+    this.subscription = BackHandler.addEventListener("hardwareBackPress", () => {
+      const { onChangeInputMethod, inputMethod } = this.props;
 
-        if (inputMethod === INPUT_METHOD.CUSTOM) {
-          onChangeInputMethod(INPUT_METHOD.NONE);
-          return true;
-        }
+      if (inputMethod === INPUT_METHOD.CUSTOM) {
+        onChangeInputMethod(INPUT_METHOD.NONE);
+        return true;
+      }
 
-        return false;
-      },
-    );
+      return false;
+    });
   }
 
   componentWillUnmount() {
@@ -83,10 +70,8 @@ export default class MessagingContainer extends React.Component {
     // Animate between states
     const animation = LayoutAnimation.create(
       keyboardAnimationDuration,
-      Platform.OS === 'android'
-        ? LayoutAnimation.Types.easeInEaseOut
-        : LayoutAnimation.Types.keyboard,
-      LayoutAnimation.Properties.opacity,
+      Platform.OS === "android" ? LayoutAnimation.Types.easeInEaseOut : LayoutAnimation.Types.keyboard,
+      LayoutAnimation.Properties.opacity
     );
     LayoutAnimation.configureNext(animation);
   }
@@ -103,28 +88,21 @@ export default class MessagingContainer extends React.Component {
       keyboardWillHide,
     } = this.props;
 
-    const useContentHeight =
-      keyboardWillShow || inputMethod === INPUT_METHOD.KEYBOARD;
+    const useContentHeight = keyboardWillShow || inputMethod === INPUT_METHOD.KEYBOARD;
 
     const containerStyle = {
       height: useContentHeight ? contentHeight : containerHeight,
     };
 
-    const showCustomInput =
-      inputMethod === INPUT_METHOD.CUSTOM && !keyboardWillShow;
+    const showCustomInput = inputMethod === INPUT_METHOD.CUSTOM && !keyboardWillShow;
 
-    const keyboardIsHidden =
-      inputMethod === INPUT_METHOD.NONE && !keyboardWillShow;
+    const keyboardIsHidden = inputMethod === INPUT_METHOD.NONE && !keyboardWillShow;
 
-    const keyboardIsHiding =
-      inputMethod === INPUT_METHOD.KEYBOARD && keyboardWillHide;
+    const keyboardIsHiding = inputMethod === INPUT_METHOD.KEYBOARD && keyboardWillHide;
 
     const inputStyle = {
       height: showCustomInput ? keyboardHeight || 250 : 0,
-      marginTop:
-        isIphoneX() && (keyboardIsHidden || keyboardIsHiding)
-          ? 24
-          : 0,
+      marginTop: isIphoneX() && (keyboardIsHidden || keyboardIsHiding) ? 24 : 0,
     };
 
     return (

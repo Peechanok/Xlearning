@@ -4,22 +4,22 @@ import {
   Platform,
   UIManager,
   View,
-} from 'react-native';
-import * as PropTypes from 'prop-types';
-import React from 'react';
-import { isIphoneX } from 'react-native-iphone-x-helper';
+} from "react-native";
+import * as PropTypes from "prop-types";
+import React from "react";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 if (
-  Platform.OS === 'android' &&
+  Platform.OS === "android" &&
   UIManager.setLayoutAnimationEnabledExperimental
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
 export const INPUT_METHOD = {
-  NONE: 'NONE',
-  KEYBOARD: 'KEYBOARD',
-  CUSTOM: 'CUSTOM',
+  NONE: "NONE",
+  KEYBOARD: "KEYBOARD",
+  CUSTOM: "CUSTOM",
 };
 
 export default class MessagingContainer extends React.Component {
@@ -32,8 +32,7 @@ export default class MessagingContainer extends React.Component {
     keyboardWillShow: PropTypes.bool.isRequired,
     keyboardWillHide: PropTypes.bool.isRequired,
     keyboardAnimationDuration: PropTypes.number.isRequired,
-    inputMethod: PropTypes.oneOf(Object.values(INPUT_METHOD))
-      .isRequired,
+    inputMethod: PropTypes.oneOf(Object.values(INPUT_METHOD)).isRequired,
     onChangeInputMethod: PropTypes.func,
     renderInputMethodEditor: PropTypes.func.isRequired,
   };
@@ -45,7 +44,7 @@ export default class MessagingContainer extends React.Component {
 
   componentDidMount() {
     this.subscription = BackHandler.addEventListener(
-      'hardwareBackPress',
+      "hardwareBackPress",
       () => {
         const { onChangeInputMethod, inputMethod } = this.props;
 
@@ -55,7 +54,7 @@ export default class MessagingContainer extends React.Component {
         }
 
         return false;
-      },
+      }
     );
   }
 
@@ -83,10 +82,10 @@ export default class MessagingContainer extends React.Component {
     // Animate between states
     const animation = LayoutAnimation.create(
       keyboardAnimationDuration,
-      Platform.OS === 'android'
+      Platform.OS === "android"
         ? LayoutAnimation.Types.easeInEaseOut
         : LayoutAnimation.Types.keyboard,
-      LayoutAnimation.Properties.opacity,
+      LayoutAnimation.Properties.opacity
     );
     LayoutAnimation.configureNext(animation);
   }
@@ -121,10 +120,7 @@ export default class MessagingContainer extends React.Component {
 
     const inputStyle = {
       height: showCustomInput ? keyboardHeight || 250 : 0,
-      marginTop:
-        isIphoneX() && (keyboardIsHidden || keyboardIsHiding)
-          ? 24
-          : 0,
+      marginTop: isIphoneX() && (keyboardIsHidden || keyboardIsHiding) ? 24 : 0,
     };
 
     return (
