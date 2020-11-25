@@ -29,7 +29,7 @@ import SettingsScreen from "./screens/SettingsScreen";
 
 // import { AuthContext } from "./components/context";
 
-import RootStackScreen from "./screens/RootStackScreen";
+import RootStackScreen from "./navigation/RootStackScreen";
 
 import AsyncStorage from "@react-native-community/async-storage";
 

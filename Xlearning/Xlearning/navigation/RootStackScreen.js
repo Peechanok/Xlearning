@@ -2,9 +2,9 @@ import React from "react";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import SplashScreen from "./SplashScreen";
-import SignInScreen from "./SignInScreen";
-import SignUpScreen from "./SignUpScreen";
+import SplashScreen from "../screens/SplashScreen";
+import SignInScreen from "../screens/SignInScreen";
+import SignUpScreen from "../screens/SignUpScreen";
 
 const RootStack = createStackNavigator();
 
