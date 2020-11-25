@@ -12,6 +12,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import DetailSubjectScreen from "../screens/DetailSubjectScreen";
 import AddCouseScreen from "../screens/AddCouseScreen";
 import CreateQRScreen from "../screens/CreateQRScreen";
+import CreateLessonScreen from "../screens/CreateLessonScreen";
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
@@ -226,7 +227,7 @@ const ChatScreenStackScreen = ({ navigation }) => (
   >
     <DetailsStack.Screen
       name='ข้อความ'
-      component={ChatScreen}
+      component={CreateLessonScreen}
       options={{
         headerLeft: () => (
           <Icon.Button

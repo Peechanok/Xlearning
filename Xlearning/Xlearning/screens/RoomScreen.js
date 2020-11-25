@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, ImageBackground } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 
 const RoomScreen = ({ route, navigation }) => {
   const auth = useSelector((state) => state.auth);
@@ -31,6 +32,7 @@ const RoomScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
+      
       <ImageBackground style={styles.logo} source={require("../assets/hid.jpg")}>
         <Text style={styles.title}>
           {course.id} {course.title}
@@ -40,6 +42,15 @@ const RoomScreen = ({ route, navigation }) => {
       </ImageBackground>
 
       {course.chapters.map((chapter) => renderChapterBox(chapter))}
+
+      <View>
+          <TouchableOpacity style={styles.confirm} onPress={() => Alert.alert("Simple Button pressed")}>
+            <Text style={{ color: "white" }}>
+              <Ionicons name='ios-add-circle' size={24} color='white' />
+              {"\t"} {"\t"}เพิ่มบทเรียน
+            </Text>
+          </TouchableOpacity>
+        </View>
     </ScrollView>
   );
 };
@@ -90,6 +101,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     height: 200,
+  },
+  confirm: {
+    height: 70,
+    width: 360,
+    borderRadius: 10,
+    // backgroundColor: "#FFD700",
+    backgroundColor: "green",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    bottom: 0,
   },
 });
 export default RoomScreen;
