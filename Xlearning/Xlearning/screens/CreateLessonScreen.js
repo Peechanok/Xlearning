@@ -74,6 +74,9 @@ export default class CreateLessonScreen extends React.Component {
     
             </View>
                     <Text>{"\n"}</Text>
+
+
+                    
             <View>
                     <TouchableOpacity
                     style = {styles.confirm}
