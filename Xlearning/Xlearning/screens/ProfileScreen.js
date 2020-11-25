@@ -111,7 +111,7 @@ const ProfileScreen = (navigation) => {
   };
 
   const saveProfileData = () => {
-    const profile = { ...auth.user, fullname: data.fullname, imageUri: image ?? "" };
+    const profile = { ...auth.user, fullname: data.fullname, imageUri: image != null ? image : "" };
     dispatch(updateUserProfile(profile));
     Alert.alert("อัพเดตข้อมูลสำเร็จ");
   };
