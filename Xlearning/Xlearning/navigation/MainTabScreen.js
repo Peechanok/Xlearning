@@ -38,7 +38,6 @@ const MainTabScreen = () => (
         tabBarIcon: ({ color }) => <MaterialCommunityIcons name='google-classroom' color={color} size={26} />,
       }}
     />
-
     <Tab.Screen
       name='attend'
       component={RoomScreenStackScreen}
@@ -144,6 +143,20 @@ const MyCourseScreenStackScreen = ({ navigation }) => (
     <DetailsStack.Screen
       name='ห้องเรียนของฉัน'
       component={MyCourseScreen}
+      options={{
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
+            size={25}
+            backgroundColor='#1f65ff'
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <DetailsStack.Screen
+      name='คอร์สเรียน'
+      component={DetailSubjectScreen}
       options={{
         headerLeft: () => (
           <Icon.Button

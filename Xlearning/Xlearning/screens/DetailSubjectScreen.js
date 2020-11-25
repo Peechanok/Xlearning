@@ -2,7 +2,45 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, ImageBackground } from "react-native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
-const DetailSubjectScreen = () => {
+import { useSelector } from "react-redux";
+
+const DetailSubjectScreen = ({ route, navigation }) => {
+  const auth = useSelector((state) => state.auth);
+  const { course } = route.params;
+
+  const registerCourse = () => {
+    Alert.alert("ยืนยันการลงทะเบียน");
+  };
+
+  const shouldRenderRegisterButton = () => {
+    if (auth.user.role === "student" && !course.registerStudent.includes(auth.user.id)) {
+      return (
+        <>
+          <TouchableOpacity style={styles.btn} onPress={registerCourse}>
+            <Text style={{ color: "#32CD32" }}>ลงทะเบียน</Text>
+          </TouchableOpacity>
+        </>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
+  const shouldRenderEnterCourseButton = () => {
+    if (
+      auth.user.role === "teacher" ||
+      (auth.user.role === "student" && course.registerStudent.includes(auth.user.id))
+    ) {
+      return (
+        <TouchableOpacity style={styles.btn2} onPress={() => {}}>
+          <Text style={{ color: "#6A5ACD" }}>เข้าห้องเรียน</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.logo} source={require("../assets/wan.png")} />
@@ -15,31 +53,32 @@ const DetailSubjectScreen = () => {
           {"\n"}
           {"\n"}
           {"\n"}
-          {"\n"}ภาพรวมของเทคโนโลยีเครือข่ายไร้สายและการประยุกต์ใช้งาน พื้นฐานการส่งผ่านแบบไร้สาย การแพร่กระจายคลื่นวิทยุ
-          เสาอากาศ การม๊อดดูเลท การมัลติเพล็กซ์ การควบคุมการเข้าถึงแบบหลายทางพร้อมกัน เครือข่ายท้องถิ่นแบบไร้สาย มาตรฐาน
-          IEEE 802.11 การสำรวจสถานที่ การวางแผน การออกแบบและการปรับใช้เครือข่ายท้องถิ่นแบบไร้สาย
-          ความปลอดภัยบนเครือข่ายท้องถิ่นแบบไร้สายและมาตรฐานที่เกี่ยวข้อง เครือข่ายส่วนบุคคลแบบไร้สาย
-          เครือข่ายเมืองแบบไร้สาย เครือข่ายระยะไกลแบบไร้สาย การจัดการและการแก้ปัญหาเครือข่ายไร้สายเบื้องต้น{"\n"}
+          {"\n"}
+          {course.description}
+          {"\n"}
           {"\n"}
         </Text>
         <Text style={styles.title}>
-          06016334 WIRELESS NETWORK TECHNOLOGY{"\n"}
-          {"\n"}Teacher : เซฮุนเซนเซย์
+          {course.id} {course.title}
+          {"\n"}
+          {"\n"}Teacher : {course.teacherName}
         </Text>
       </View>
 
       <View>
-        <TouchableOpacity style={styles.btn} onPress={() => Alert.alert("ยืนยันการลงทะเบียน")}>
-          <Text style={{ color: "#32CD32" }}>ลงทะเบียน</Text>
-        </TouchableOpacity>
-
+        {shouldRenderRegisterButton()}
         {/* ถ้าลงทะเบียนแล้วจะขึ้นแต่ปุ่มเข้าห้องเรียน */}
-        <TouchableOpacity style={styles.btn2} onPress={() => Alert.alert("ยืนยันการลงทะเบียน")}>
-          <Text style={{ color: "#6A5ACD" }}>เข้าห้องเรียน</Text>
-        </TouchableOpacity>
+        {shouldRenderEnterCourseButton()}
       </View>
     </ScrollView>
   );
+};
+
+DetailSubjectScreen.navigationOptions = (navigationData) => {
+  const course = navigationData.navigation.getParam("course");
+  return {
+    headerTitle: course.title, //...ชื่อประเภทอาหาร...,
+  };
 };
 
 const styles = StyleSheet.create({
@@ -106,7 +145,7 @@ const styles = StyleSheet.create({
     padding: "3%",
   },
   btn: {
-    height: "15%",
+    height: 48,
     width: "90%",
     borderColor: "#32CD32",
     borderWidth: 2,
@@ -117,9 +156,8 @@ const styles = StyleSheet.create({
     margin: "5%",
     borderRadius: 10,
   },
-
   btn2: {
-    height: "15%",
+    height: 48,
     width: "90%",
     borderColor: "#6A5ACD",
     borderWidth: 2,

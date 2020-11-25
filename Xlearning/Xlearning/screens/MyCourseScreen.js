@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import Courses from "../model/courses";
 
 // import MyNavigator  from './navigation/MyNavigator';
 
-const MyCourseScreen = () => {
+const MyCourseScreen = ({ navigation }) => {
   const auth = useSelector((state) => state.auth);
-
   const shouldRenderCreateCourseButton = () => {
     if (auth.user.role == "teacher") {
       return (
@@ -25,27 +25,32 @@ const MyCourseScreen = () => {
     }
   };
 
+  const openSubjectDetail = (course) => {
+    navigation.navigate("คอร์สเรียน", { course: course });
+  };
+
+  const renderCourseCard = (course) => {
+    return (
+      <View>
+        <TouchableOpacity style={styles.btn} onPress={() => openSubjectDetail(course)}>
+          <Image style={styles.img} source={require("../assets/wan.png")} />
+          <Text style={styles.text}>{course.shortDescription}</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>
+          {course.id} {course.title}
+        </Text>
+      </View>
+    );
+  };
+
   return (
     <ScrollView style={styles.container}>
-      <View>
-        <TouchableOpacity style={styles.btn} onPress={() => Alert.alert("Simple Button pressed")}>
-          <Image style={styles.img} source={require("../assets/wan.png")} />
-          <Text style={styles.text}>หลักการอินเทอร์เน็ต</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>06016334 WIRELESS NETWORK TECHNOLOGY</Text>
-      </View>
-
-      <View>
-        <TouchableOpacity style={styles.btn} onPress={() => Alert.alert("Simple Button pressed")}>
-          <Image style={styles.img} source={require("../assets/hid.jpg")} />
-          <Text style={styles.text}>หลักการออกแบบโดยใช้ผู้ใช้เป็นศูนย์กลาง</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>06016310 HUMAN INTERFACE DESIGN</Text>
-      </View>
+      {Courses.map((course) => {
+        return renderCourseCard(course);
+      })}
 
       {/* test */}
-
-      <View>
+      {/* <View>
         <TouchableOpacity style={styles.btn} onPress={() => Alert.alert("Simple Button pressed")}>
           <Image style={styles.img} source={require("../assets/wan.png")} />
           <Text style={styles.text}>หลักการอินเทอร์เน็ต</Text>
@@ -59,7 +64,7 @@ const MyCourseScreen = () => {
           <Text style={styles.text}>หลักการออกแบบโดยใช้ผู้ใช้เป็นศูนย์กลาง</Text>
         </TouchableOpacity>
         <Text style={styles.title}>06016310 HUMAN INTERFACE DESIGN</Text>
-      </View>
+      </View> */}
 
       {shouldRenderCreateCourseButton()}
     </ScrollView>
