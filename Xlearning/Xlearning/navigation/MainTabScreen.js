@@ -168,6 +168,20 @@ const MyCourseScreenStackScreen = ({ navigation }) => (
         ),
       }}
     />
+    <DetailsStack.Screen
+      name='ห้องเรียน'
+      component={RoomScreen}
+      options={{
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
+            size={25}
+            backgroundColor='#1f65ff'
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
   </DetailsStack.Navigator>
 );
 const RoomScreenStackScreen = ({ navigation }) => (

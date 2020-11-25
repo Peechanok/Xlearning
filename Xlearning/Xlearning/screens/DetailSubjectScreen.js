@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert, ScrollView, ImageBackground } from "react-native";
-
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
@@ -10,6 +9,10 @@ const DetailSubjectScreen = ({ route, navigation }) => {
 
   const registerCourse = () => {
     Alert.alert("ยืนยันการลงทะเบียน");
+  };
+
+  const enterCourse = () => {
+    navigation.navigate("ห้องเรียน", { course: course });
   };
 
   const shouldRenderRegisterButton = () => {
@@ -32,7 +35,7 @@ const DetailSubjectScreen = ({ route, navigation }) => {
       (auth.user.role === "student" && course.registerStudent.includes(auth.user.id))
     ) {
       return (
-        <TouchableOpacity style={styles.btn2} onPress={() => {}}>
+        <TouchableOpacity style={styles.btn2} onPress={enterCourse}>
           <Text style={{ color: "#6A5ACD" }}>เข้าห้องเรียน</Text>
         </TouchableOpacity>
       );
@@ -43,26 +46,22 @@ const DetailSubjectScreen = ({ route, navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/wan.png")} />
-      <Image style={styles.teacher} source={require("../assets/sehun.jpg")} />
+      <ImageBackground style={styles.logo} source={require("../assets/wan.png")}>
+        <Image style={styles.teacher} source={require("../assets/sehun.jpg")} />
+      </ImageBackground>
+      {/* <Image style={styles.logo} source={require("../assets/wan.png")} />
+      <Image style={styles.teacher} source={require("../assets/sehun.jpg")} /> */}
 
       <View style={styles.box}>
         <Image style={styles.img} source={require("../assets/green-slate.jpg")} />
 
-        <Text style={styles.text}>
-          {"\n"}
-          {"\n"}
-          {"\n"}
-          {"\n"}
-          {course.description}
-          {"\n"}
-          {"\n"}
-        </Text>
         <Text style={styles.title}>
           {course.id} {course.title}
-          {"\n"}
           {"\n"}Teacher : {course.teacherName}
         </Text>
+        <View style={{ marginTop: 95 }}>
+          <Text style={styles.text}>{course.description}</Text>
+        </View>
       </View>
 
       <View>
@@ -74,13 +73,6 @@ const DetailSubjectScreen = ({ route, navigation }) => {
   );
 };
 
-DetailSubjectScreen.navigationOptions = (navigationData) => {
-  const course = navigationData.navigation.getParam("course");
-  return {
-    headerTitle: course.title, //...ชื่อประเภทอาหาร...,
-  };
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -89,29 +81,13 @@ const styles = StyleSheet.create({
   },
   img: {
     position: "absolute",
-    // height: 200,
-    // width:  300,
     height: "70%",
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
-    // backgroundColor:"black",
-    // opacity: 0.5,
-    // padding: 10,
     borderWidth: 3,
   },
-
-  teacher: {
-    ...StyleSheet.absoluteFill,
-    left: "35%",
-    right: "35%",
-    top: "10%",
-    height: "10%",
-    width: "30%",
-    borderRadius: 100,
-  },
-
   text: {
     color: "white",
     alignItems: "center",
@@ -121,9 +97,9 @@ const styles = StyleSheet.create({
     padding: "20%",
   },
   title: {
-    flex: 1,
     ...StyleSheet.absoluteFill,
-    fontSize: 10,
+    flex: 1,
+    fontSize: 14,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
@@ -133,10 +109,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: "2%",
     width: "85%",
+    marginHorizontal: "10%",
     height: 80,
-    top: 70,
-    left: "10%",
-    right: "10%",
+    top: 60,
   },
   box: {
     alignItems: "center",
@@ -169,10 +144,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   logo: {
-    position: "relative",
+    flex: 1,
     width: "100%",
-    height: 200,
-    bottom: 10,
+    height: 160,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+  teacher: {
+    width: 90,
+    height: 90,
+    alignSelf: "center",
+    borderRadius: 100,
   },
 });
 export default DetailSubjectScreen;

@@ -7,6 +7,12 @@ const Courses = [
       "ภาพรวมของเทคโนโลยีเครือข่ายไร้สายและการประยุกต์ใช้งาน พื้นฐานการส่งผ่านแบบไร้สาย การแพร่กระจายคลื่นวิทยุ เสาอากาศ การม๊อดดูเลท การมัลติเพล็กซ์ การควบคุมการเข้าถึงแบบหลายทางพร้อมกัน เครือข่ายท้องถิ่นแบบไร้สาย มาตรฐาน IEEE 802.11 การสำรวจสถานที่ การวางแผน การออกแบบและการปรับใช้เครือข่ายท้องถิ่นแบบไร้สาย ความปลอดภัยบนเครือข่ายท้องถิ่นแบบไร้สายและมาตรฐานที่เกี่ยวข้อง เครือข่ายส่วนบุคคลแบบไร้สาย เครือข่ายเมืองแบบไร้สาย เครือข่ายระยะไกลแบบไร้สาย การจัดการและการแก้ปัญหาเครือข่ายไร้สายเบื้องต้น",
     teacherName: "เซฮุนเซนเซย์",
     teacherId: "teacher01",
+    chapters: [
+      {
+        title: "CH 1: Introducing Wireless Network Technology",
+        bullets: [],
+      },
+    ],
     registerStudent: [],
   },
   {
@@ -16,6 +22,24 @@ const Courses = [
     description: "",
     teacherName: "เซฮุนเซนเซย์",
     teacherId: "teacher02",
+    chapters: [
+      {
+        title: "CH 1: Introducing Human Interface Design",
+        bullets: [
+          "Chapter 1 Lecture Slides Annotatable",
+          "Chapter 1: Exercise 1 Interactive Content",
+          "Assignment-1.1 : สร้าง prototype ไทยชนะ",
+        ],
+      },
+      {
+        title: "CH 2: Prototype Design",
+        bullets: [
+          "Chapter 2 Lecture Slides Annotatable",
+          "Chapter 2: Exercise 2 Interactive Content",
+          "Assignment-2.1 : สร้าง prototype ไทยชนะ",
+        ],
+      },
+    ],
     registerStudent: [],
   },
 ];
