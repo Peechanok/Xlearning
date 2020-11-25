@@ -18,14 +18,19 @@ import { AntDesign } from "@expo/vector-icons";
 const HomeScreen = () => {
   const [selectedValue_year, setSelectedValue_year] = useState();
   const [selectedValue_branch, setSelectedValue_branch] = useState();
-  const [value, onChangeText] = React.useState("I'm look for ...");
+  const [value, onChangeText] = React.useState("");
 
   return (
     <ScrollView style={styles.container}>
       <Image style={styles.logo} source={require("../assets/digital-learning3.jpg")} />
 
       <View style={styles.box}>
-        <TextInput style={styles.search} onChangeText={(text) => onChangeText(text)} value={value} />
+        <TextInput
+          style={styles.search}
+          onChangeText={(text) => onChangeText(text)}
+          value={value}
+          placeholder={"I'm look for ..."}
+        />
 
         {/* เลือกปีที่เรียน */}
 
