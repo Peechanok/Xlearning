@@ -13,6 +13,8 @@ const Courses = [
         bullets: [],
       },
     ],
+    year: 3,
+    branch: 1,
     registerStudent: [],
   },
   {
@@ -40,6 +42,8 @@ const Courses = [
         ],
       },
     ],
+    year: 3,
+    branch: 1,
     registerStudent: [],
   },
 ];
