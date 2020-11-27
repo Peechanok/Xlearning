@@ -44,7 +44,7 @@ const Courses = [
     ],
     year: 3,
     branch: 1,
-    registerStudent: [],
+    registerStudent: [1],
   },
 ];
 

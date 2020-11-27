@@ -16,7 +16,7 @@ const DetailSubjectScreen = ({ route, navigation }) => {
   };
 
   const shouldRenderRegisterButton = () => {
-    if (auth.user.role === "student" && !course.registerStudent.includes(auth.user.id)) {
+    if (auth.user.role.toLowerCase() === "student" && !course.registerStudent.includes(auth.user.id)) {
       return (
         <>
           <TouchableOpacity style={styles.btn} onPress={registerCourse}>
@@ -31,8 +31,8 @@ const DetailSubjectScreen = ({ route, navigation }) => {
 
   const shouldRenderEnterCourseButton = () => {
     if (
-      auth.user.role === "teacher" ||
-      (auth.user.role === "student" && course.registerStudent.includes(auth.user.id))
+      auth.user.role.toLowerCase() === "teacher" ||
+      (auth.user.role.toLowerCase() === "student" && course.registerStudent.includes(auth.user.id))
     ) {
       return (
         <TouchableOpacity style={styles.btn2} onPress={enterCourse}>
@@ -49,12 +49,8 @@ const DetailSubjectScreen = ({ route, navigation }) => {
       <ImageBackground style={styles.logo} source={require("../assets/wan.png")}>
         <Image style={styles.teacher} source={require("../assets/sehun.jpg")} />
       </ImageBackground>
-      {/* <Image style={styles.logo} source={require("../assets/wan.png")} />
-      <Image style={styles.teacher} source={require("../assets/sehun.jpg")} /> */}
 
-      <View style={styles.box}>
-        <Image style={styles.img} source={require("../assets/green-slate.jpg")} />
-
+      <ScrollView style={styles.box}>
         <Text style={styles.title}>
           {course.id} {course.title}
           {"\n"}Teacher : {course.teacherName}
@@ -62,7 +58,7 @@ const DetailSubjectScreen = ({ route, navigation }) => {
         <View style={{ marginTop: 95 }}>
           <Text style={styles.text}>{course.description}</Text>
         </View>
-      </View>
+      </ScrollView>
 
       <View>
         {shouldRenderRegisterButton()}
@@ -89,17 +85,15 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   text: {
-    color: "white",
+    color: "black",
     alignItems: "center",
     justifyContent: "center",
     fontSize: 14,
     textAlign: "center",
-    padding: "20%",
+    padding: "5%",
   },
   title: {
-    ...StyleSheet.absoluteFill,
-    flex: 1,
-    fontSize: 14,
+    fontSize: 10,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
@@ -107,17 +101,14 @@ const styles = StyleSheet.create({
     backgroundColor: "gold",
     color: "black",
     borderWidth: 2,
-    padding: "2%",
-    width: "85%",
-    marginHorizontal: "10%",
+    padding: "5%",
+    width: "100%",
     height: 80,
-    top: 60,
+    top: 0,
   },
   box: {
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    padding: "3%",
+    backgroundColor: "white",
+    margin: "5%",
   },
   btn: {
     height: 48,
