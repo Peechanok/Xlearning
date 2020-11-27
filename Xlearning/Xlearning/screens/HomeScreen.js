@@ -11,14 +11,24 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
+import FilterCourseScreen from "./FilterCourseScreen";
 import { AntDesign } from "@expo/vector-icons";
 
 // import MyNavigator  from './navigation/MyNavigator';
 
-const HomeScreen = () => {
-  const [selectedValue_year, setSelectedValue_year] = useState();
-  const [selectedValue_branch, setSelectedValue_branch] = useState();
+const HomeScreen = ({ navigation }) => {
+  const [selectedValue_year, setSelectedValue_year] = useState(0);
+  const [selectedValue_branch, setSelectedValue_branch] = useState(0);
   const [value, onChangeText] = React.useState("");
+
+  const renderSearchScreen = () => {
+    const filter = {
+      title: value,
+      year: selectedValue_year,
+      branch: selectedValue_branch,
+    };
+    return <FilterCourseScreen navigation={navigation} filters={filter} />;
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -43,12 +53,12 @@ const HomeScreen = () => {
             selectedValue={selectedValue_year}
             onValueChange={(itemValue, itemIndex) => setSelectedValue_year(itemValue)}
           >
-            <Picker.Item label='ทั้งหมด' value='0' />
-            <Picker.Item label='1' value='1' />
-            <Picker.Item label='2' value='2' />
-            <Picker.Item label='3' value='3' />
-            <Picker.Item label='4' value='4' />
-            <Picker.Item label='Others' value='5' />
+            <Picker.Item label='ทั้งหมด' value={0} />
+            <Picker.Item label='1' value={1} />
+            <Picker.Item label='2' value={2} />
+            <Picker.Item label='3' value={3} />
+            <Picker.Item label='4' value={4} />
+            <Picker.Item label='Others' value={5} />
           </Picker>
         </View>
 
@@ -62,10 +72,10 @@ const HomeScreen = () => {
             selectedValue={selectedValue_branch}
             onValueChange={(itemValue, itemIndex) => setSelectedValue_branch(itemValue)}
           >
-            <Picker.Item label='ทั้งหมด' value='0' />
-            <Picker.Item label='BSc. Information Technology' value='1' />
-            <Picker.Item label='BSc. Business Information Technology ' value='2' />
-            <Picker.Item label='BSc. Data Science and Business Analytics ' value='3' />
+            <Picker.Item label='ทั้งหมด' value={0} />
+            <Picker.Item label='BSc. Information Technology' value={1} />
+            <Picker.Item label='BSc. Business Information Technology ' value={2} />
+            <Picker.Item label='BSc. Data Science and Business Analytics ' value={3} />
           </Picker>
         </View>
         <Text>{"\n"}</Text>
@@ -76,6 +86,8 @@ const HomeScreen = () => {
             <Text> {"\t"}ค้นหา</Text>
           </TouchableOpacity>
         </View>
+
+        {renderSearchScreen()}
       </View>
     </ScrollView>
   );

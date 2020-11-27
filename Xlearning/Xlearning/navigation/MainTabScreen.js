@@ -48,7 +48,7 @@ const MainTabScreen = () => (
         tabBarIcon: ({ color }) => <MaterialCommunityIcons name='checkbox-marked' color={color} size={26} />,
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name='message'
       component={ChatScreenStackScreen}
       options={{
@@ -56,7 +56,7 @@ const MainTabScreen = () => (
         tabBarColor: "#d02860",
         tabBarIcon: ({ color }) => <MaterialCommunityIcons name='message-text-outline' color={color} size={26} />,
       }}
-    />
+    /> */}
     <Tab.Screen
       name='profile'
       component={ProfileScreenStackScreen}
