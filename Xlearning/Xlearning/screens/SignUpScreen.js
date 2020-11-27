@@ -281,6 +281,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
+    dropdown: {
+        width: "100%",
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: "center",
+        color:"#6495ED",    
+        backgroundColor: "white",
+        borderRadius:10,
+        borderWidth: 2,
+        borderColor: "white", 
+    
+      },                       
   footer: {
     flex: Platform.OS === "ios" ? 3 : 5,
     backgroundColor: "#fff",
